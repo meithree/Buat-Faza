@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Faza 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * {margin:0; padding:0; box-sizing:border-box;}
+  body {
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    position: relative;
+  }
+
+  /* === Halaman dasar === */
+  .page {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-45deg, #f8b6d3, #91b5f8, #fef6d9, #cc8bc7);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+    opacity: 0;
+    transition: opacity 1s ease;
+    overflow: visible;
+  }
+  .page.active {opacity: 1; z-index: 1;}
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  /* === Page 1 === */
+  .greeting {
+    justify-content: space-between;
+    padding: 0 10%;
+    z-index: 1;
+  }
+  .text-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  .text-container h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 60px;
+    color: white;
+    text-shadow: 0 0 15px rgba(255,255,255,0.8);
+    animation: typing 2s steps(12), blink 0.6s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 4px solid white;
+  }
+  @keyframes typing { from { width: 0 } to { width: 100% } }
+  @keyframes blink { 50% { border-color: transparent } }
+
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  .image-container img {
+    width: 380px;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.6);
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* === Awan === */
+  .cloud {
+    position: absolute;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    filter: blur(8px);
+    animation: moveCloud 60s linear infinite;
+    z-index: 0;
+  }
+  @keyframes moveCloud {
+    0% { transform: translateX(-200px); }
+    100% { transform: translateX(120vw); }
+  }
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+  }
+  .cloud::before { width: 80px; height: 80px; top: -30px; left: 30px; }
+  .cloud::after { width: 100px; height: 100px; top: -20px; left: -40px; }
+
+  /* === Popup === */
+  .popup-page {display:flex; justify-content:center; align-items:center;}
+  .popup {
+    background: rgba(255,255,255,0.85);
+    border-radius: 25px;
+    padding: 30px 40px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation: popUp 0.6s ease;
+  }
+  .popup p { font-size: 22px; color: #444; }
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  button {
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    font-family: 'Poppins', sans-serif;
+  }
+  #yesBtn {background: #ffb6c1; color: white;}
+  #noBtn {background: #a4b0be; color: white;}
+  button:hover { transform: scale(1.1); opacity: 0.9; }
+  @keyframes popUp {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* === Page 3 (Ucapan) === */
+  .ucapan {
+    flex-direction: column;
+    text-align: center;
+    color: white;
+  }
+  .ucapan h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 50px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.9);
+  }
+  .ucapan h2 {
+    margin-top: 10px;
+    text-shadow: 0 0 15px rgba(255,255,255,0.8);
+  }
+  .message {
+    background: rgba(255,255,255,0.25);
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    padding: 25px;
+    margin-top: 25px;
+    width: 70%;
+    align-self: center;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 15px rgba(255,255,255,0.4);
+    line-height: 1.6;
+  }
+
+  /* === Bunga jatuh === */
+  .flower {
+    position: fixed;
+    font-size: 22px;
+    animation: fall linear infinite;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 999;
+  }
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Shake popup */
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%,60% { transform: translateX(-10px); }
+    40%,80% { transform: translateX(10px); }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- === PAGE 1 === -->
+<div class="page greeting active" id="page1">
+  <div class="text-container">
+    <h1>Hallo Faza!</h1>
+  </div>
+  <div class="image-container">
+    <img src="Faza.jpeg" alt="Foto Faza">
+  </div>
+
+  <!-- Awan -->
+  <div class="cloud" style="width:120px; height:60px; top:10%; left:-150px; animation: delay: 0s;"></div>
+  <div class="cloud" style="width:180px; height:80px; top:40%; left:-200px; animation-delay:7s;"></div>
+  <div class="cloud" style="width:150px; height:70px; top:70%; left:-250px; animation-delay:100s;"></div>
+</div>
+
+<!-- === PAGE 2 === -->
+<div class="page popup-page" id="page2">
+  <div class="popup">
+    <p>aku cantik ga za? 🥺💖</p>
+    <div class="buttons">
+      <button id="yesBtn">Iyalah coy 😝</button>
+      <button id="noBtn">GA 😭</button>
+    </div>
+  </div>
+</div>
+
+<!-- === PAGE 3 === -->
+<div class="page ucapan" id="page3">
+  <h1>Selamat Ulang Tahun!</h1>
+  <h2>Faza Kamillah Mushoffa</h2>
+  <div class="message">
+  Happy Birthday fazaaaaa, <br>
+  huft... kangen berat kapan ya main bareng lagie, yeyyy ur’e officially a grown-up now!!! <br>
+  Enjoy ur final year as a teen xixixi, <br>
+  pokoknya semangat trs kuliahnya GA BOLEH GALAU GALAU YEEE. <br>
+  faza nge-roblox terus ni tante!!! belajar kocak ntar klo aku ke luar negeri kamu tour guide nya ya za wkwk🎉✨
+  </div>
+</div>
+
+<script>
+  const page1 = document.getElementById('page1');
+  const page2 = document.getElementById('page2');
+  const page3 = document.getElementById('page3');
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+
+  // Klik halaman 1 -> ke popup
+  page1.addEventListener('click', () => {
+    page1.classList.remove('active');
+    page2.classList.add('active');
+  });
+
+  // Klik YES -> ke ucapan
+  yesBtn.addEventListener('click', () => {
+    page2.classList.remove('active');
+    page3.classList.add('active');
+    createFlowers();
+  });
+
+  // Klik NO -> animasi goyang
+  noBtn.addEventListener('click', () => {
+    const popup = document.querySelector('.popup');
+    popup.style.animation = 'shake 0.5s';
+    setTimeout(() => popup.style.animation = 'popUp 0.6s ease', 500);
+  });
+
+  // Efek bunga jatuh 🌸
+  function createFlowers() {
+    const flowers = ['🌸', '🌷', '💮', '🌺', '🌹'];
+    setInterval(() => {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.top = '-10px';
+      flower.style.animationDuration = 4 + Math.random() * 4 + 's';
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 8000);
+    }, 400);
+  }
+</script>
+</body>
+</html>
